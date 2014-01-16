@@ -1,0 +1,51 @@
+How to install GCC 4.8 in Xcode 5
+
+Step 1.
+Install homebrew: follow instructions in the bottom of http://brew.sh/
+
+Step 2.
+Make sure Homebrew is up and running.  Run and do that you're told to by:
+brew update
+brew doctor
+
+Step3.
+Install gcc 4.8 (http://apple.stackexchange.com/questions/38222/how-do-i-install-gcc-via-homebrew)
+Run:
+brew tap homebrew/versions
+brew install --enable-all-languages gcc48
+This downloads and compiles on site the gcc version 4.8.1, and it takes time.
+Then it makes a bunch of links at necessary places to the "Cellar" where the libraries/executables are created.  GCC should run from /usr/local/bin/gcc
+Check by running /usr/local/gcc --version, it should be 4.8.1
+The last step in my installation failed, and I had to run "brew link gcc48" and delete a bunch of gcc related files installed before without brew (brew is better because this is a package manager)
+
+Step4.
+Run gcc --version.  Mine outputs:
+Configured with: --prefix=/Applications/Xcode.app/Contents/Developer/usr --with-gxx-include-dir=/usr/include/c++/4.2.1
+Apple LLVM version 5.0 (clang-500.2.79) (based on LLVM 3.3svn)
+which means that the PATH somewhere is pointing to LLVM still..  We'll have to account for that.
+Yet, run
+gcc-4.8 --version
+Mine gives
+gcc-4.8 (GCC) 4.8.2
+Copyright (C) 2013 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+So, this is how we'll be calling gcc!
+
+Step5. 
+Follow http://stackoverflow.com/questions/19061966/how-to-use-a-recent-gcc-with-xcode-5 in where it talks about installing a plugin for Xcode.  I already edited the plugin file, so download the attachment and run:
+sudo cp -r ~/Downloads/GCC\ 4.8.xcspec /Applications/Xcode.app/Contents/PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins/
+to install it.
+
+Step6.
+Reload Xcode.
+Change compiler to GCC 4.8 in project settings.
+
+Step7.
+On the page with project properties choose the target that is using OpenMP functionality in the dropdown menu in the upper left, find OtherLinkerFlags which should be "-lmx -lmex -lmat" and add "-lgomp" to the list.
+
+This seems to be all we have to do to get OpenMP running, and just to check whether it is running in the code we can use preprocessor check:
+#ifdef _OPENMP
+
+(which I believe is part of OpenMP itself).
+

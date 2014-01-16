@@ -29,11 +29,16 @@ http://www.mathworks.com.au/help/matlab/ref/mex.html
 Folder "init_setup" contains a simple C code file test.c for testing the mex setup.  Browse into this folder and run
 mex test.c
 test
+OR simply
+start
 
 To enable OpenMP support, make sure you are using OpenMP supporting compiler and to test the environment run
 mex text.c CFLAGS='\$CFLAGS -fopenmp' LDFLAGS='\$LDFLAGS -fopenmp'
 test
-The output should mension how many cores are available for OpenMP, if the output is identical to the run above
+OR simply
+start
+
+The output should mension how many cores are available for OpenMP, if the output is identical to the run above 
 OpenMP is not enabled.
 
 

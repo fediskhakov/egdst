@@ -1,0 +1,54 @@
+Running GCC with mex command from Matlab on Mac with XCode 5.0
+
+The key component: properly set up mexopts.sh file.  GCC (version 4.8) should be already installed in XCode,
+then it can be called using XCode command line tools when mex is run.
+
+Step 1.
+Configure mexopts.sh.  On Matlab 2013a standard setup (mex -setup) produced the working code (section maci64)
+where the modification is only needed in CC field - with the right compiler version. Below is the setup for the
+compiler and the linker in the mexopts.sh file.  The same setup was tested in R2011b,R2012b.
+
+------------------- <<< cut >>> -------------------
+            CC='xcrun gcc-4.8'
+## workaround clang defect temporarily use line below           SDKROOT='/Developer/SDKs/MacOSX10.6.sdk'
+# compute SDK root on the fly
+# target 10.9 
+            MW_SDK_TEMP="find `xcode-select -print-path` -name MacOSX10.9.sdk"
+            MW_SDKROOT=`$MW_SDK_TEMP`
+            MACOSX_DEPLOYMENT_TARGET='10.9'
+            ARCHS='x86_64'
+            # CFLAGS="-fno-common -arch $ARCHS -isysroot $MW_SDKROOT -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET"
+            CFLAGS="-fno-common -arch $ARCHS"
+            CFLAGS="$CFLAGS  -fexceptions"
+            CLIBS="$MLIBS"
+            COPTIMFLAGS='-O2 -DNDEBUG'
+            CDEBUGFLAGS='-g'
+#
+            CLIBS="$CLIBS -lstdc++"
+            # C++keyName: Clang++
+            # C++keyManufacturer: Apple
+            # C++keyLanguage: C++
+            # C++keyVersion:
+            # C++keyLinkerName:
+            # C++keyLinkerVersion:
+            # CXX='xcrun  -sdk macosx10.9  clang++'
+            CXX='xcrun  g++'
+            CXXFLAGS="-fno-common -fexceptions -arch $ARCHS -isysroot $MW_SDKROOT -mmacosx-version-min=$MACOSX_DEPLOYMENT_TARGET"
+            CXXLIBS="$MLIBS -lstdc++"
+            CXXOPTIMFLAGS='-O2 -DNDEBUG'
+            CXXDEBUGFLAGS='-g'
+------------------- <<< cut >>> -------------------
+
+
+Step 2.
+Running mex however gives error:
+dyld: Library not loaded: /usr/local/opt/mpfr2/lib/libmpfr.1.dylib
+  Referenced from: /usr/local/Cellar/gcc48/4.8.2/libexec/gcc/x86_64-apple-darwin13.0.0/4.8.2/cc1
+  Reason: Incompatible library version: cc1 requires version 4.0.0 or later, but libmpfr.1.dylib provides version 3.0.0
+The workaround is provided in http://stackoverflow.com/questions/19212058/matlab-dyld-library-not-loaded-usr-local-opt-mpfr2-lib-libmpfr-1-dylib
+Run in Matlab
+setenv('DYLD_LIBRARY_PATH','')
+before mexing
+
+
+
