@@ -1,0 +1,11 @@
+*.pdf
+*.mat
+*.asv
+*.mex*
+*.dvi
+*.out
+*.zip
+*.log
+
+**/build_parts/**
+**/*xcodeproj
