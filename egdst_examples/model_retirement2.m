@@ -37,8 +37,8 @@ retire1.param={'wage','wage (times multiplicator shock)',1.05};
 retire1.a0=-5;
 %shock (no shock)
 retire1.shock='lognormal';
-retire1.shock={'sigma','0'};
-retire1.shock={'mu','0'};
+retire1.shock={'sigma','0.25'};
+retire1.shock={'mu','-0.5*sigma*sigma'};
 
 %Verbosity
 retire1.cflags.VERBOSE=0;
@@ -58,7 +58,7 @@ end
 %Simulate and plot
 retire1.sim([1 0.25]);
 try
-    retire1.plot2('mack-d1');
+    retire1.plot2('mack-d1-q1');
 catch er
 end
 
