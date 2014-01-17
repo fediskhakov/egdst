@@ -46,7 +46,7 @@ cake1.solve
 %Solution plots
 try
     cake1.plot1('c');
-    cake1.plot1('vf','it=1:5:50');
+    cake1.plot1('vf','it=[1:5:25 25]');
 catch er
 end
 

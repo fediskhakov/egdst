@@ -1,4 +1,4 @@
-%Cake eating problem with discount factor = 1.0
+%Cake eating problem with discount factor = 0.75
 
 delete out.txt %diary
 diary out.txt %diary
@@ -28,7 +28,7 @@ cake1.u={'extrap','log(x)'};
 %intertemporal budget
 cake1.budget={'cashinhand','savings'};
 cake1.budget={'marginal','1'};
-cake1.discount='1';
+cake1.discount='.75';
 %credit constraint
 cake1.a0=0;
 %shock (no shock)
@@ -46,7 +46,7 @@ cake1.solve
 %Solution plots
 try
     cake1.plot1('c');
-    cake1.plot1('vf','it=1:5:50');
+    cake1.plot1('vf','it=[1:5:25 25]');
 catch er
 end
 
