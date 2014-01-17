@@ -3,60 +3,60 @@
 delete out.txt %diary
 diary out.txt %diary
 
-deaton1=egdstmodel('deaton1','tmp_deaton1');
+deaton2=egdstmodel('deaton2','tmp_deaton2');
 %time and space
-deaton1.t0=1;             %initial period
-deaton1.T=25;             %terminal period
+deaton2.t0=1;             %initial period
+deaton2.T=25;             %terminal period
 %grids
-deaton1.mmax=100;          %max cash-on-hand
-deaton1.ngridmax=1000;    %max number of grid point in assets
-deaton1.ngridm=100;       %standard number of grid points in assets
-deaton1.nthrhmax=10;      %max number of treshold points in TH
-deaton1.ny=10;             %number of points in discrete representation of income shocks
+deaton2.mmax=100;          %max cash-on-hand
+deaton2.ngridmax=1000;    %max number of grid point in assets
+deaton2.ngridm=100;       %standard number of grid points in assets
+deaton2.nthrhmax=10;      %max number of treshold points in TH
+deaton2.ny=10;             %number of points in discrete representation of income shocks
 %states and discrete choices
-deaton1.s={'Singleton state',{0,'dummy state'}};
-deaton1.trpr={'true',[1]};
-deaton1.feasible={'defaultfeasible',true};
-deaton1.d={'Dummy decision',{0,'dummy decision'}};
-deaton1.choiceset={'defaultallow',true};
+deaton2.s={'Singleton state',{0,'dummy state'}};
+deaton2.trpr={'true',[1]};
+deaton2.feasible={'defaultfeasible',true};
+deaton2.d={'Dummy decision',{0,'dummy decision'}};
+deaton2.choiceset={'defaultallow',true};
 %utility
-deaton1.u={'utility','log(consumption)'};
-deaton1.u={'marginal','1/consumption'};
-deaton1.u={'marginalinverse','1/mutility'};
+deaton2.u={'utility','log(consumption)'};
+deaton2.u={'marginal','1/consumption'};
+deaton2.u={'marginalinverse','1/mutility'};
 %extrapolation curvature function
-deaton1.u={'extrap','log(x)'};
+deaton2.u={'extrap','log(x)'};
 %intertemporal budget
-deaton1.budget={'cashinhand','savings*(1+interest)+income_level'};
-deaton1.budget={'marginal','1+interest'};
-deaton1.discount='1/(1+interest)';
-deaton1.param={'interest','return on savings',0.01};
-deaton1.eq={'income_level','Realized income','income*shock','next'};
-deaton1.param={'income','income (times multiplicator shock)',1.25};
+deaton2.budget={'cashinhand','savings*(1+interest)+income_level'};
+deaton2.budget={'marginal','1+interest'};
+deaton2.discount='1/(1+interest)';
+deaton2.param={'interest','return on savings',0.01};
+deaton2.eq={'income_level','Realized income','income*shock','next'};
+deaton2.param={'income','income (times multiplicator shock)',1.25};
 %credit constraint
-deaton1.a0=-25;
+deaton2.a0=-25;
 %shock (no shock)
-deaton1.shock='lognormal';
-deaton1.shock={'sigma','0.75'};
-deaton1.shock={'mu','0'};
+deaton2.shock='lognormal';
+deaton2.shock={'sigma','0.75'};
+deaton2.shock={'mu','0'};
 
 %Verbosity
-deaton1.cflags.VERBOSE=0;
+deaton2.cflags.VERBOSE=0;
 
 %Compile and solve
-deaton1.compile
-deaton1.solve
+deaton2.compile
+deaton2.solve
 
 %Solution plots
 try
-    deaton1.plot1('c');
-    deaton1.plot1('vf','it=[1:5:25 25]');
+    deaton2.plot1('c');
+    deaton2.plot1('vf','it=[1:5:25 25]');
 catch er
 end
 
 %Simulate and plot
-deaton1.sim([1 0.25]);
+deaton2.sim([1 0.25]);
 try
-    deaton1.plot2('mack-q1');
+    deaton2.plot2('mack-q1');
 catch er
 end
 
