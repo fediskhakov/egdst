@@ -37,7 +37,7 @@ deaton2.a0=-25;
 %shock (no shock)
 deaton2.shock='lognormal';
 deaton2.shock={'sigma','0.75'};
-deaton2.shock={'mu','0'};
+deaton2.shock={'mu','-0.5*sigma*sigma'};
 
 %Verbosity
 deaton2.cflags.VERBOSE=0;
