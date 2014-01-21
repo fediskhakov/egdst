@@ -18,14 +18,12 @@ if numel(dir('randstream.mat'))==0
 end    
 
 %show help of egdstmodel class
-%{
 ch=input('Display background info on egdstmodel class (''help egdstmodel'')? [y/N] ','s');
 if ~isempty(ch) || (ischar('ch') && numel(ch)>0)
     if ismember(ch(1),{'y','Y'})
         help egdstmodel
     end
 end
-%}
 
 %choice of model script
 fprintf('Models in the showroom:\n');
