@@ -529,7 +529,7 @@ classdef (ConstructOnLoad) egdstmodel < handle
             obj.ngridm=1*value(1);
             if obj.ngridm*1.5>obj.ngridmax
                 obj.ngridmax=2*obj.ngridm;    
-                warning (sprintf('Automatically adjusted ngridmax to %d becasue ngridm=%d',obj.ngridmax,obj.ngridm));
+                %warning (sprintf('Automatically adjusted ngridmax to %d becasue ngridm=%d',obj.ngridmax,obj.ngridm));
             end
         end
         function res=set.ngridmax(obj,value)
