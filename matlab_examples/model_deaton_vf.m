@@ -34,7 +34,7 @@ end %income
 %main solver
 function policy=egm_solver()
     policy=cell(Tbar,1); %output will be a cell array by time periods
-    savingsgrid=linspace(0,mmax,ngridm); %grid over savings twice the size to accomodate bequest
+    savingsgrid=linspace(0,mmax,ngridm); %grid over savings
     %main EGM loop
     for it=Tbar:-1:1
         if it==Tbar

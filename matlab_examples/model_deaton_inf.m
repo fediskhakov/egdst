@@ -32,7 +32,7 @@ end %income
 
 %main solver
 function policy=egm_solver()
-    savingsgrid=linspace(0,mmax,ngridm); %grid over savings twice the size to accomodate bequest
+    savingsgrid=linspace(0,mmax,ngridm); %grid over savings
     %main EGM loop
     for it=1:maxiter
         if it==1
