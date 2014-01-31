@@ -503,6 +503,10 @@ classdef (ConstructOnLoad) egdstmodel < handle
         function delete(obj)
             %distructor of object : clean up after yourself
             try 
+            	%check if Matlab is in the object directory, and try to step out before deletion
+            	if strcmp(cd,obj.dir)
+            		cd('..');
+            	end
                 rmdir(obj.dir,'s');
                 if ~obj.quiet
                 	display(['Deleting directory ' obj.dir]);
@@ -1361,7 +1365,7 @@ classdef (ConstructOnLoad) egdstmodel < handle
         end        
     end
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    methods (Access=private)
+    methods (Access=public, Hidden)
 		function str = ht(model,x)
 			% This function returns elapced time in hunam readable format
 			% x= time in seconds 
