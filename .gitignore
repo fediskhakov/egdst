@@ -10,3 +10,4 @@
 **/tmp*
 **/build_parts/**
 **/*xcodeproj
+**/out.txt
