@@ -26,6 +26,7 @@ for it=TBAR-1:-1:1
   policy{it}.c=1./(DF*(1+R)*rhs);%current period consumption (log utility)
   policy{it}.w=savingsgrid+policy{it}.c;
 end
+
 t=toc;%stop the timer
 fprintf('Solved Deaton model with\n %d periods,\n %d endogenous grid points and\n %d quadrature points in \n%s\n',TBAR,NM,EXPN,ht(t));
 

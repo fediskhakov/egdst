@@ -16,7 +16,7 @@ p.sigma =              0.1                     ;% simga param in log-normal dist
 %--------------------------------------------------------------------------------------------------------
 parseargs(p,varargin,'q'); %parse passed arguments (and get rid of p.)
 
-model=egdstmodel('retired','tmp_model1');
+model=egdstmodel('model1 for ZICE2014 lecture','tmp_egm_model1');
 %time
 model.t0=1;             %initial period
 model.T=p.T;            %terminal period

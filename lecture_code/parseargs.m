@@ -68,16 +68,20 @@ if ~( nargin>2 && ischar(varargin{1}) && ismember(varargin{1},{'q','quiet','sile
         case {'integer','int8','int16','int64'}
             fprintf(' %-18s %15.0d\n',nm,pp.(nm));
         case {'numeric','double','single','float'}
-            if numel(pp.(nm))==1
-                fprintf(' %-18s %15.5f\n',nm,pp.(nm));
+            if numel(pp.(nm))==0
+                fprintf(' %-18s Empty\n');
             else
-                if numel(pp.(nm))==2
-                    fprintf(' %-18s [%5.3f,%5.3f]\n',nm,pp.(nm)(1),pp.(nm)(2));
+                if numel(pp.(nm))==1
+                    fprintf(' %-18s %15.5f\n',nm,pp.(nm));
                 else
-                    fprintf(' %-18s [%1.1f..%5.1f]',nm,pp.(nm)(1),pp.(nm)(end));
-                    fprintf(' (%dx%d)\n',size(pp.(nm)));
-                end
-            end            
+                    if numel(pp.(nm))==2
+                        fprintf(' %-18s [%5.3f,%5.3f]\n',nm,pp.(nm)(1),pp.(nm)(2));
+                    else
+                        fprintf(' %-18s [%1.1f..%5.1f]',nm,pp.(nm)(1),pp.(nm)(end));
+                        fprintf(' (%dx%d)\n',size(pp.(nm)));
+                    end
+                end            
+            end
         case 'cell'
                 fprintf(' %-18s cell (%dx%d)\n',nm,size(pp.(nm)));
         case 'struct'
