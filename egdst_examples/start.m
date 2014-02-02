@@ -7,7 +7,7 @@ end
 clear
 clear classes
 close all
-addpath(['.' filesep],['..' filesep]);
+addpath(['..' filesep],['..' filesep '..' filesep]); %Need ../.. on the path
 clc
 
 %create randstream.mat
