@@ -12,7 +12,8 @@
 #define SIGN(X) (((X)>0)?(1.0):(-1.0))
 //workaround INFINITY - really needed? Works on mac ok
 #ifndef INFINITY
-#define INFINITY (-log(0))
+#define INFINITY HUGE_VAL
+//#define INFINITY (-log(0))
 #endif
 //numerical tolerance for various routines
 #ifndef TOLERANCE
